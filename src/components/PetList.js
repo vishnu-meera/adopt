@@ -1,18 +1,24 @@
 import React from "react";
 import Pet from "./Pet";
 
-const data = [
-  { name: "Luna", type: "dog", breed: "Havanese" },
-  { name: "Luna", type: "dog", breed: "Havanese" },
-  { name: "Luna", type: "dog", breed: "Havanese" },
-];
-
-export default function PetList() {
+export default function PetList({ pets }) {
   return (
-    <div>
-      {data.map(({ name, type, breed }) => (
-        <Pet key={name} name={name} type={type} breed={breed} />
-      ))}
+    <div className="search">
+      {pets.length === 0 ? (
+        <h1>No pets found</h1>
+      ) : (
+        pets.map(({ name, type, breeds, id, contact, photos }) => (
+          <Pet
+            key={id}
+            name={name}
+            animal={type}
+            breed={breeds.primary}
+            media={photos}
+            location={contact.address.city}
+            id={id}
+          />
+        ))
+      )}
     </div>
   );
 }
